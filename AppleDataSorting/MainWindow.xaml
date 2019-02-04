@@ -1,0 +1,56 @@
+﻿<Window x:Class="AppleDataSorting.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppleDataSorting"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="820">
+    <Window.Resources>
+        <Style x:Key="BorderStyle">
+            <Setter Property="Border.BorderBrush" Value="Gray" />
+            <Setter Property="Border.BorderThickness" Value="1" />
+            <Setter Property="Border.CornerRadius" Value="6" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Width="790" Height="80" Style="{StaticResource BorderStyle}">
+            <Label Content="Путь до папок устройства" FontSize="14"/>
+        </Border>
+        <TextBox Name="sourceTextBox" Grid.Row="0" Width="700"  Height="40" 
+                     TextAlignment="left"
+                     VerticalContentAlignment="Center"
+                     Margin="10,37,82,13"
+                     FontSize="14" BorderBrush="Black"/>
+        <Button Name="sourceDirectoryPath" Grid.Row="0" Width="40"  Height="40" Margin="720,37,32,13" Click="sourceDirectoryPath_Click"/>
+
+        <Border Grid.Row="1" Width="790" Height="80" Style="{StaticResource BorderStyle}">
+            <Label Content="Путь до папки результата" FontSize="14"/>
+        </Border>
+        <TextBox Name="resultTextBox" Grid.Row="1" Width="700"  Height="40" 
+                     TextAlignment="left"
+                     VerticalContentAlignment="Center"
+                     Margin="10,37,82,13"
+                     FontSize="14" BorderBrush="Black"/>
+        <Button Name="resultDirectoryPath" Grid.Row="1" Width="40"  Height="40" Margin="720,37,32,13" Click="resultDirectoryPath_Click"/>
+
+        <Border Grid.Row="2" Width="790" Height="80" Style="{StaticResource BorderStyle}">
+            <Label Content="Действия" FontSize="14"/>
+        </Border>
+        <Button Grid.Row="2" Content="Разобрать" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="40" Click="Button_Click" FontSize="14"/>
+
+        <Border Grid.Row="3" Width="790" Height="80" Style="{StaticResource BorderStyle}">
+            <Label Content="Информация" FontSize="14"/>
+        </Border>
+        <TextBlock Name="InfoTextBlock" Grid.Row="3" Margin="20,30,22,10" Text="Все отлично!" Width="770" Height="50" TextWrapping="Wrap" Foreground="Green" FontSize="14"/>
+
+    </Grid>
+</Window>
