@@ -1,0 +1,15 @@
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\bin\Debug\AppleDataSorting.exe.config
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\bin\Debug\AppleDataSorting.exe
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\bin\Debug\AppleDataSorting.pdb
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\AppleDataSorting.csprojAssemblyReference.cache
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\MainWindow.g.cs
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\App.g.cs
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\AppleDataSorting_MarkupCompile.cache
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\AppleDataSorting_MarkupCompile.lref
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\MainWindow.baml
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\AppleDataSorting.g.resources
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\AppleDataSorting.Properties.Resources.resources
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\AppleDataSorting.csproj.GenerateResource.cache
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\AppleDataSorting.csproj.CoreCompileInputs.cache
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\AppleDataSorting.exe
+C:\Users\foton\Downloads\AppleDataSorting-master\AppleDataSorting-master\AppleDataSorting\obj\Debug\AppleDataSorting.pdb

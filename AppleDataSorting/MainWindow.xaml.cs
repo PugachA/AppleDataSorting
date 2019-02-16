@@ -1,19 +1,6 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Path = System.IO.Path;
 using System.Windows.Forms;
 
@@ -49,6 +36,7 @@ namespace AppleDataSorting
             Directory.CreateDirectory(sortedMOVDir);
             string[] picList = Directory.GetFiles(sourceDir, "*.jpg");
             string[] movList = Directory.GetFiles(sourceDir, "*.mov");
+            string[] mp4List = Directory.GetFiles(sourceDir, "*.mp4");
             foreach (string f in picList)
             {
                 // Remove path from the file name.
@@ -68,6 +56,17 @@ namespace AppleDataSorting
                 // Will overwrite if the destination file already exists.
                 File.Copy(Path.Combine(sourceDir, fName), Path.Combine(sortedMOVDir, fName), true);
             }
+
+            foreach (string f in mp4List)
+            {
+                // Remove path from the file name.
+                string fName = f.Substring(sourceDir.Length + 1);
+
+                // Use the Path.Combine method to safely append the file name to the path.
+                // Will overwrite if the destination file already exists.
+                File.Copy(Path.Combine(sourceDir, fName), Path.Combine(sortedMOVDir, fName), true);
+            }
+
             Dispatcher.Invoke(delegate { InfoTextBlock.Text = "Готово"; });
         }
 
