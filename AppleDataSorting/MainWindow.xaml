@@ -45,7 +45,9 @@
         <Border Grid.Row="2" Width="790" Height="80" Style="{StaticResource BorderStyle}">
             <Label Content="Действия" FontSize="14"/>
         </Border>
-        <Button Grid.Row="2" Content="Разобрать" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="40" Click="Button_Click" FontSize="14"/>
+        <Button Grid.Row="2" Content="Разобрать" Width="110" Height="40" Click="Button_Click" FontSize="14" />
+        <CheckBox Name="pictureCheckBox" Content="Разбирать фотографии" Grid.Row="2" Margin="466,25,-81,50"  IsChecked="True"/>
+        <CheckBox Name="movieCheckBox" Content="Разбирать видео" VerticalAlignment="Center" Grid.Row="2" Margin="466,50,-81,25" IsChecked="True"/>
 
         <Border Grid.Row="3" Width="790" Height="80" Style="{StaticResource BorderStyle}">
             <Label Content="Информация" FontSize="14"/>

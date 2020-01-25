@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using Path = System.IO.Path;
 using System.Windows.Forms;
+using System;
+using System.Windows.Media;
 
 namespace AppleDataSorting
 {
@@ -19,55 +21,81 @@ namespace AppleDataSorting
         string sourceDir;
         string sortedJPGDir;
         string sortedMOVDir;
+        bool searchPicture;
+        bool searchMovie;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            searchPicture = (bool)pictureCheckBox.IsChecked;
+            searchMovie = (bool)movieCheckBox.IsChecked;
             sourceDir = sourceTextBox.Text;
             sortedJPGDir = resultTextBox.Text + @"\Pictures";
             sortedMOVDir = resultTextBox.Text + @"\Movies";
             InfoTextBlock.Text = "Начали разбирать";
+            InfoTextBlock.Foreground = Brushes.Green;
             Task categoriesTask = Task.Factory.StartNew(Processing);
 
         }
 
         private void Processing()
         {
-            Directory.CreateDirectory(sortedJPGDir);
-            Directory.CreateDirectory(sortedMOVDir);
-            string[] picList = Directory.GetFiles(sourceDir, "*.jpg");
-            string[] movList = Directory.GetFiles(sourceDir, "*.mov");
-            string[] mp4List = Directory.GetFiles(sourceDir, "*.mp4");
-            foreach (string f in picList)
+            try
             {
-                // Remove path from the file name.
-                string fName = f.Substring(sourceDir.Length + 1);
+                if (searchPicture)
+                {
+                    Directory.CreateDirectory(sortedJPGDir);
+                    string[] picList = Directory.GetFiles(sourceDir, "*.jpg", SearchOption.AllDirectories);
 
-                // Use the Path.Combine method to safely append the file name to the path.
-                // Will overwrite if the destination file already exists.
-                File.Copy(Path.Combine(sourceDir, fName), Path.Combine(sortedJPGDir, fName), true);
+                    foreach (string f in picList)
+                    {
+                        // Remove path from the file name.
+                        string fName = Path.GetFileName(f);
+
+                        // Use the Path.Combine method to safely append the file name to the path.
+                        // Will overwrite if the destination file already exists.
+                        File.Copy(f, Path.Combine(sortedJPGDir, fName), true);
+                    }
+
+                }
+
+                if (searchMovie)
+                {
+                    Directory.CreateDirectory(sortedMOVDir);
+                    string[] movList = Directory.GetFiles(sourceDir, "*.mov", SearchOption.AllDirectories);
+                    string[] mp4List = Directory.GetFiles(sourceDir, "*.mp4", SearchOption.AllDirectories);
+
+
+                    foreach (string f in movList)
+                    {
+                        // Remove path from the file name.
+                        string fName = Path.GetFileName(f);
+
+                        // Use the Path.Combine method to safely append the file name to the path.
+                        // Will overwrite if the destination file already exists.
+                        File.Copy(f, Path.Combine(sortedMOVDir, fName), true);
+                    }
+
+                    foreach (string f in mp4List)
+                    {
+                        // Remove path from the file name.
+                        string fName = Path.GetFileName(f);
+
+                        // Use the Path.Combine method to safely append the file name to the path.
+                        // Will overwrite if the destination file already exists.
+                        File.Copy(f, Path.Combine(sortedMOVDir, fName), true);
+                    }
+                }
+
+                Dispatcher.Invoke(delegate { InfoTextBlock.Foreground = Brushes.Green; InfoTextBlock.Text = "Готово"; });
             }
-
-            foreach (string f in movList)
+            catch (Exception ex)
             {
-                // Remove path from the file name.
-                string fName = f.Substring(sourceDir.Length + 1);
-
-                // Use the Path.Combine method to safely append the file name to the path.
-                // Will overwrite if the destination file already exists.
-                File.Copy(Path.Combine(sourceDir, fName), Path.Combine(sortedMOVDir, fName), true);
+                Dispatcher.Invoke(delegate
+                {
+                    InfoTextBlock.Foreground = Brushes.Red;
+                    InfoTextBlock.Text = $"Ошибка: {ex.Message}; {ex}";
+                });
             }
-
-            foreach (string f in mp4List)
-            {
-                // Remove path from the file name.
-                string fName = f.Substring(sourceDir.Length + 1);
-
-                // Use the Path.Combine method to safely append the file name to the path.
-                // Will overwrite if the destination file already exists.
-                File.Copy(Path.Combine(sourceDir, fName), Path.Combine(sortedMOVDir, fName), true);
-            }
-
-            Dispatcher.Invoke(delegate { InfoTextBlock.Text = "Готово"; });
         }
 
         private void sourceDirectoryPath_Click(object sender, RoutedEventArgs e)
