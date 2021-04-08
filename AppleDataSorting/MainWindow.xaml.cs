@@ -5,6 +5,7 @@ using Path = System.IO.Path;
 using System.Windows.Forms;
 using System;
 using System.Windows.Media;
+using System.Collections.Generic;
 
 namespace AppleDataSorting
 {
@@ -46,16 +47,7 @@ namespace AppleDataSorting
                     Directory.CreateDirectory(sortedJPGDir);
                     string[] picList = Directory.GetFiles(sourceDir, "*.jpg", SearchOption.AllDirectories);
 
-                    foreach (string f in picList)
-                    {
-                        // Remove path from the file name.
-                        string fName = Path.GetFileName(f);
-
-                        // Use the Path.Combine method to safely append the file name to the path.
-                        // Will overwrite if the destination file already exists.
-                        File.Copy(f, Path.Combine(sortedJPGDir, fName), true);
-                    }
-
+                    Parallel.ForEach(picList, (f) => CopyFile(f, sortedJPGDir));
                 }
 
                 if (searchMovie)
@@ -64,26 +56,9 @@ namespace AppleDataSorting
                     string[] movList = Directory.GetFiles(sourceDir, "*.mov", SearchOption.AllDirectories);
                     string[] mp4List = Directory.GetFiles(sourceDir, "*.mp4", SearchOption.AllDirectories);
 
+                    Parallel.ForEach(movList, (f) => CopyFile(f, sortedMOVDir));
 
-                    foreach (string f in movList)
-                    {
-                        // Remove path from the file name.
-                        string fName = Path.GetFileName(f);
-
-                        // Use the Path.Combine method to safely append the file name to the path.
-                        // Will overwrite if the destination file already exists.
-                        File.Copy(f, Path.Combine(sortedMOVDir, fName), true);
-                    }
-
-                    foreach (string f in mp4List)
-                    {
-                        // Remove path from the file name.
-                        string fName = Path.GetFileName(f);
-
-                        // Use the Path.Combine method to safely append the file name to the path.
-                        // Will overwrite if the destination file already exists.
-                        File.Copy(f, Path.Combine(sortedMOVDir, fName), true);
-                    }
+                    Parallel.ForEach(mp4List, (f) => CopyFile(f, sortedMOVDir));
                 }
 
                 Dispatcher.Invoke(delegate { InfoTextBlock.Foreground = Brushes.Green; InfoTextBlock.Text = "Готово"; });
@@ -96,6 +71,13 @@ namespace AppleDataSorting
                     InfoTextBlock.Text = $"Ошибка: {ex.Message}; {ex}";
                 });
             }
+        }
+
+        private void CopyFile(string filePath, string directoryPath)
+        {
+            var fileName = Path.GetFileName(filePath);
+
+            File.Copy(filePath, Path.Combine(directoryPath, fileName), true);
         }
 
         private void sourceDirectoryPath_Click(object sender, RoutedEventArgs e)
